@@ -9,14 +9,14 @@ const CONFIG = {
 const PORT = 3001;
 const client = new line.Client(CONFIG);
 express()
-    .get('/', (req, res) => {res.send('hello world')})
+    //.get('/', (req, res) => {res.send('hello world')})
     .post("/webhook", line.middleware(CONFIG), (req,res) => handleBot(req,res))
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 function handleBot(req,res){
     res.status(200).end();
     req.body.events.map((event) => {
-        client.replyMessage(event.replyMessage,{
+        client.replyMessage(event.replyToken,{
             type: 'text',
             text: 'こんにちは！'
         });
