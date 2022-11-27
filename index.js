@@ -7,8 +7,9 @@ const CONFIG = {
     channelSecret: process.env.SECRET_KEY,
 };
 const PORT = 3001;
-const clieny = new line.Client(CONFIG);
+const client = new line.Client(CONFIG);
 express()
+    .get('/', (req, res) => {res.send('hello world')})
     .post("/webhook", line.middleware(CONFIG), (req,res) => handleBot(req,res))
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
