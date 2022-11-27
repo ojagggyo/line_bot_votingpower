@@ -13,7 +13,7 @@ express()
     .post("/webhook", line.middleware(CONFIG), (req,res) => handleBot(req,res))
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-function hndleBot(req,res){
+function handleBot(req,res){
     res.status(200),end();
     req.body.events.map((event) => {
         client.replyMessage(event.replyMessage,{
