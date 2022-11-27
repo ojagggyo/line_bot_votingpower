@@ -9,7 +9,7 @@ const CONFIG = {
 const PORT = 3001;
 const clieny = new line.Client(CONFIG);
 express()
-    .post("/webhook", line.middleware(CINFUG), (req,res) => handleBot(req,res))
+    .post("/webhook", line.middleware(CONFIG), (req,res) => handleBot(req,res))
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 function hndleBot(req,res){
