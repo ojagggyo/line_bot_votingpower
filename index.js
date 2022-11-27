@@ -14,13 +14,12 @@ express()
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 function handleBot(req,res){
-    console.log(`req.body=${req.body}`);
     res.status(200).end();
     req.body.events.map((event) => {
-        console.log(`event.body=${event.body}`);
+        console.log(`event.message.text=${event.message.text}`);
         client.replyMessage(event.replyToken,{
             type: 'text',
-            text: 'こんにちは！'
+            text: `こんにちは！${event.message.text}`
         });
     })
 }
