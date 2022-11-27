@@ -14,7 +14,7 @@ express()
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 function handleBot(req,res){
-    res.status(200),end();
+    res.status(200).end();
     req.body.events.map((event) => {
         client.replyMessage(event.replyMessage,{
             type: 'text',
