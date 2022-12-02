@@ -22,27 +22,36 @@ function handleBot(req,res){
         client.replyMessage(event.replyToken,{
             type: 'text',
             //text: `${event.message.text}`
-            text: isVotingPowerEnough(event.message.text)
+            text: getPowerEnough(event.message.text)
         });
     })
 }
 
-isVotingPowerEnough = async (account_name) => { 
+function getPowerEnough(account_name){
     const dsteem = require('dsteem');
     const client = new dsteem.Client('https://api.steememory.com');    
-    return new Promise((resolve) => {
+    const result = client.database.call('get_accounts', [[account_name]]);
+    if(result > 0){
+        return result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
+    }
+}
 
-        client.database
-        .call('get_accounts', [[account_name]])
-            .then(result => {
-          	    const vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
-                resolve(vp);
-            })
-            .catch(err =>{
-                console.log(err);
-                resolve(-1)
-            })
-    })
-};
+// isVotingPowerEnough = async (account_name) => { 
+//     const dsteem = require('dsteem');
+//     const client = new dsteem.Client('https://api.steememory.com');    
+//     return new Promise((resolve) => {
+
+//         client.database
+//         .call('get_accounts', [[account_name]])
+//             .then(result => {
+//           	    const vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
+//                 resolve(vp);
+//             })
+//             .catch(err =>{
+//                 console.log(err);
+//                 resolve(-1)
+//             })
+//     })
+// };
 
 
