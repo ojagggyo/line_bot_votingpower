@@ -21,7 +21,28 @@ function handleBot(req,res){
     req.body.events.map((event) => {
         client.replyMessage(event.replyToken,{
             type: 'text',
-            text: `${event.message.text}`
+            //text: `${event.message.text}`
+            text: isVotingPowerEnough(event.message.text)
         });
     })
 }
+
+isVotingPowerEnough = async (account_name) => { 
+    const dsteem = require('dsteem');
+    const client = new dsteem.Client('https://api.steememory.com');    
+    return new Promise((resolve) => {
+
+        client.database
+        .call('get_accounts', [[account_name]])
+            .then(result => {
+          	    const vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
+                resolve(vp);
+            })
+            .catch(err =>{
+                console.log(err);
+                resolve(-1)
+            })
+    })
+};
+
+
