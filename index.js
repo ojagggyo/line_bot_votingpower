@@ -6,7 +6,7 @@ const CONFIG = {
     channelSecret: process.env.SECRET_KEY,
 };
 const PORT = 3001;
-const client = new line.Client(CONFIG);
+const lineclient = new line.Client(CONFIG);
 express()
     .get('/', 
         (req, res) => {res.send('hello world')})
@@ -18,40 +18,19 @@ express()
 
 function handleBot(req,res){
     res.status(200).end();
-    req.body.events.map((event) => {
-        client.replyMessage(event.replyToken,{
-            type: 'text',
-            text: `${event.message.text}`
-            //text: getPowerEnough(event.message.text)
-        });
-    })
+    req.body.events.map((event) => 
+        { 
+            const dsteem = require('dsteem');
+            const client = new dsteem.Client('https://api.steememory.com');       
+            client.database
+            .call('get_accounts', [[event.message.text]])
+                .then(result => {
+                    const vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
+                    lineclient.replyMessage(event.replyToken,{type: 'text', text: `${vp}`});
+                })
+                .catch(err =>{
+                    console.log(err);
+                })
+        }
+    )    
 }
-
-// function getPowerEnough(account_name){
-//     const dsteem = require('dsteem');
-//     const client = new dsteem.Client('https://api.steememory.com');
-//     const result = client.database.call('get_accounts', [[account_name]]);
-//     if(result > 0){
-//         return result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
-//     }
-// }
-
-// isVotingPowerEnough = async (account_name) => { 
-//     const dsteem = require('dsteem');
-//     const client = new dsteem.Client('https://api.steememory.com');    
-//     return new Promise((resolve) => {
-
-//         client.database
-//         .call('get_accounts', [[account_name]])
-//             .then(result => {
-//           	    const vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
-//                 resolve(vp);
-//             })
-//             .catch(err =>{
-//                 console.log(err);
-//                 resolve(-1)
-//             })
-//     })
-// };
-
-
