@@ -25,8 +25,9 @@ function handleBot(req,res){
             client.database
             .call('get_accounts', [[event.message.text]])
                 .then(result => {
-                    const vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
-                    lineclient.replyMessage(event.replyToken,{type: 'text', text: `${vp}`});
+                    let vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
+                    vp = vp / 100;
+                    lineclient.replyMessage(event.replyToken,{type: 'text', text: `${vp.toFixed(3)}`});
                 })
                 .catch(err =>{
                     console.log(err);
