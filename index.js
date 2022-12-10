@@ -21,13 +21,20 @@ function handleBot(req,res){
     req.body.events.map((event) => 
         { 
             const dsteem = require('dsteem');
-            const client = new dsteem.Client('https://api.steememory.com');       
-            client.database
-            .call('get_accounts', [[event.message.text]])
+            const client = new dsteem.Client('https://api.steememory.com');
+        
+             if (req.body.events[0].type === "message") {
+                 
+             }
+        
+            client.database.call('get_accounts', [[event.message.text]])
                 .then(result => {
                     let vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
                     vp = vp / 100;
-                    lineclient.replyMessage(event.replyToken,{type: 'text', text: `Voting Powerは、${vp.toFixed(1)}です。`});
+                    lineclient.replyMessage(event.replyToken,
+                        {type: 'text', text: `こんにちは、${event.message.text}さん`},
+                        {type: 'text', text: `Voting Powerは、${vp.toFixed(1)}です。`}
+                   );
                 })
                 .catch(err =>{
                     console.log(err);
