@@ -34,6 +34,9 @@ function message(event){
     const client = new dsteem.Client('https://dev.steememory.com');
     client.database.call('get_accounts', [[event.message.text]])
         .then(result => {
+
+            console.log(result[0]);
+
             let vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
             vp = vp / 100;
             lineclient.replyMessage(event.replyToken,
