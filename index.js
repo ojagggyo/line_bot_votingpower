@@ -2,8 +2,8 @@ const line =require("@line/bot-sdk");
 const express = require("express");
 require('dotenv').config();
 const CONFIG = {
-    channelAccessToken: process.env.ACCESS_TOKEN,
-    channelSecret: process.env.SECRET_KEY,
+    channelAccessToken: process.env.YOUR_CHANNEL_ACCESS_TOKEN,
+    channelSecret: process.env.YOUR_CHANNEL_SECRET,
 };
 const PORT = 3001;
 const lineclient = new line.Client(CONFIG);
