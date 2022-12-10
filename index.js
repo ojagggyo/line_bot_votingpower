@@ -34,7 +34,8 @@ function handleBot(req,res){
                     lineclient.replyMessage(event.replyToken,
                         [
                             {type: 'text', text: `こんにちは、${event.message.text}さん`},
-                            {type: 'text', text: `Voting Powerは、${vp.toFixed(1)}です。`}
+                            {type: 'text', text: `Voting Powerは、${vp.toFixed(1)}です。`},
+                            {type: 'text', text: `https://steemit.com/@${event.message.text}`},
                         ]
                    );
                 })
