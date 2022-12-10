@@ -23,9 +23,7 @@ function handleBot(req,res){
              if (req.body.events[0].type === "message") {
                  message(event);
              }else if (req.body.events[0].type === "follow") {
-                 //follow(event);
              }else if (req.body.events[0].type === "unfollow") {
-                 //unfollow(event);
              }       
         }
     )    
@@ -48,19 +46,3 @@ function message(event){
         })
         .catch(err =>{console.log(err);})
 }
-
-// function follow(event){
-//     lineclient.replyMessage(event.replyToken,
-//         [
-//             {type: 'text', text: `ありがとう、${event.message.text}さん`}
-//         ]
-//     );
-// }
-
-// function unfollow(event){
-//     lineclient.replyMessage(event.replyToken,
-//         [
-//             {type: 'text', text: `さようなら、${event.message.text}さん`}
-//         ]
-//     );
-// }
