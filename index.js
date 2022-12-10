@@ -32,8 +32,10 @@ function handleBot(req,res){
                     let vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
                     vp = vp / 100;
                     lineclient.replyMessage(event.replyToken,
-                        {type: 'text', text: `こんにちは、${event.message.text}さん`},
-                        {type: 'text', text: `Voting Powerは、${vp.toFixed(1)}です。`}
+                        messages: [
+                            {type: 'text', text: `こんにちは、${event.message.text}さん`},
+                            {type: 'text', text: `Voting Powerは、${vp.toFixed(1)}です。`}
+                        ]
                    );
                 })
                 .catch(err =>{
