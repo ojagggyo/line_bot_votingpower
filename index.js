@@ -32,6 +32,7 @@ function handleBot(req,res){
 function message(event){
     const dsteem = require('dsteem');
     const client = new dsteem.Client('https://api.steememory.com');
+    console.log(`username=${event.message.text}`);
     client.database.call('get_accounts', [[event.message.text]])
         .then(result => {
             let vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
