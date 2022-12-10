@@ -32,6 +32,9 @@ function handleBot(req,res){
 function message(event){
     const dsteem = require('dsteem');
     const client = new dsteem.Client('https://dev.steememory.com');
+
+    console.log(event.message.text);
+
     client.database.call('get_accounts', [[event.message.text]])
         .then(result => {
 
