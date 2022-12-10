@@ -35,7 +35,7 @@ function handleBot(req,res){
                         [
                             {type: 'text', text: `こんにちは、${event.message.text}さん`},
                             {type: 'text', text: `Voting Powerは、${vp.toFixed(1)}です。`},
-                            {type: 'text', text: `https://steemit.com/@${event.message.text}`},
+                            {type: 'text', text: `https://steemit.com/@${event.message.text}/posts`},
                         ]
                    );
                 })
