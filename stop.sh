@@ -1,0 +1,2 @@
+docker stop line_bot_votingpower
+docker rm line_bot_votingpower
