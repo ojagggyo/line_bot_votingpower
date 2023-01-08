@@ -20,10 +20,7 @@ ojagggyo/line_bot_votingpower
 ### ログ出力
 docker logs line_bot_votingpower -f --tail 10
 
-# Ubuntu 
-export YOUR_CHANNEL_ACCESS_TOKEN=zVjDnmO9RjgNzGgihQVuan+oH5ZHMDymoCgIXlJOnwIpfmNMdvc/DHwy3WEVd1f204UeQGBEkufU5+ZDes3pwo5oLQ1rZeNetKNfBkQtWWFs3pBG7QtRly6SuDdjx6RCTSBjgOHQfkWLa5OgS74YxwdB04t89/1O/w1cDnyilFU=
 
-export YOUR_CHANNEL_SECRET=00f4ac9a3403e2c9237f341a35ae22b2
 
 # -----------------------------------------------------------
 # line_bot_1
