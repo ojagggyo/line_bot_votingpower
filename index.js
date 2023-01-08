@@ -5,7 +5,7 @@ const CONFIG = {
     channelAccessToken: process.env.YOUR_CHANNEL_ACCESS_TOKEN,
     channelSecret: process.env.YOUR_CHANNEL_SECRET,
 };
-const PORT = 3001;
+const PORT = 3003;
 const lineclient = new line.Client(CONFIG);
 express()
     .get('/', 
