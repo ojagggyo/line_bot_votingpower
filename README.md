@@ -23,7 +23,6 @@ docker logs line_bot_votingpower -f --tail 10
 
 
 # -----------------------------------------------------------
-# line_bot_1 
 
 
 ## 環境設定 
@@ -32,4 +31,9 @@ npm i dsteem
 npm i express 
 npm i dotenv 
 npm i  @line/bot-sdk express dotenv 
+
+
+# -----------------------------------------------------------
+https://developers.line.biz/console/provider/1657686688
+
 
